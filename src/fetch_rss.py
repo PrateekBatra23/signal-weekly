@@ -31,5 +31,6 @@ def fetch_rss_items():
             print(f"Failed to fetch {url}:{e}")
             continue
     return items
-result=fetch_rss_items()
-print(len(result))
+if __name__ == "__main__":
+    result=fetch_rss_items()
+    print(len(result))
