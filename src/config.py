@@ -17,7 +17,7 @@ HN_SEARCH_TERMS = [
 ]
 
 NEWSAPI_QUERY = "artificial intelligence OR LLM OR GPT OR machine learning"
-
+SIMILARITY_THRESHOLD = 0.55
 LOOKBACK_DAYS = 7
 MIN_TOPICS = 5
 MAX_TOPICS = 10
