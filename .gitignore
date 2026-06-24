@@ -6,3 +6,6 @@ venv/
 src/.env
 output_raw.json
 selected.txt
+preview.json
+digest_2026-06-24_.md
+published.json

@@ -1,8 +1,9 @@
 import json
 from fetch_rss import fetch_rss_items
 from fetch_newsapi import fetch_newsapi_items
-from rank import cluster_items
+from rank import cluster_items,filter_published
 from summarize import summarize_clusters
+
 def main():
     print("Fetching RSS....")
     rss_items = fetch_rss_items()
@@ -23,6 +24,16 @@ def main():
     clusters = cluster_items(all_items)
     print(len(clusters))
 
+    print("Removing Prepublished titles.....")
+    try:
+        with open("published.json") as f:
+            published = json.load(f)
+    except FileNotFoundError:
+        published = []
+
+    clusters = filter_published(clusters, published)
+    print(f"After dedup: {len(clusters)} fresh clusters")
+
     print("Summarizing with Claude...")
     result = summarize_clusters(clusters)
 
@@ -35,5 +46,8 @@ def main():
             f.write(f"{item['link']}\n")
     print("Saved to selected.txt")
 
+    with open("preview.json", "w") as f:
+        json.dump(result["items"], f, indent=2)
+    print("Saved to preview.json")
 if __name__ == "__main__":
     main()
