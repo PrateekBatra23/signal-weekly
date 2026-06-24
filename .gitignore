@@ -5,3 +5,4 @@ venv/
 .venv/
 src/.env
 output_raw.json
+selected.txt
